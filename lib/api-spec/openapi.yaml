@@ -1,22 +1,30 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Healthcare Analytics & Disease Prediction API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: patients
+    description: Patient operations
+  - name: doctors
+    description: Doctor operations
+  - name: appointments
+    description: Appointment operations
+  - name: predictions
+    description: Disease prediction operations
+  - name: analytics
+    description: Analytics operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +32,144 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /patients:
+    get:
+      operationId: listPatients
+      tags: [patients]
+      summary: List all patients
+      responses:
+        "200":
+          description: List of patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      operationId: createPatient
+      tags: [patients]
+      summary: Create a patient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePatient"
+      responses:
+        "201":
+          description: Patient created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+  /patients/{id}:
+    get:
+      operationId: getPatient
+      tags: [patients]
+      summary: Get patient by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Patient details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+  /doctors:
+    get:
+      operationId: listDoctors
+      tags: [doctors]
+      summary: List all doctors
+      responses:
+        "200":
+          description: List of doctors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Doctor"
+  /appointments:
+    get:
+      operationId: listAppointments
+      tags: [appointments]
+      summary: List all appointments
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+    post:
+      operationId: createAppointment
+      tags: [appointments]
+      summary: Create appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAppointment"
+      responses:
+        "201":
+          description: Appointment created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+  /predictions:
+    post:
+      operationId: predictDisease
+      tags: [predictions]
+      summary: Run AI disease prediction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PredictionInput"
+      responses:
+        "200":
+          description: Prediction result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictionResult"
+  /analytics/overview:
+    get:
+      operationId: getAnalyticsOverview
+      tags: [analytics]
+      summary: Get analytics overview stats
+      responses:
+        "200":
+          description: Overview stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsOverview"
+  /analytics/disease-trends:
+    get:
+      operationId: getDiseaseTrends
+      tags: [analytics]
+      summary: Get disease trend data
+      responses:
+        "200":
+          description: Disease trends
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiseaseTrendPoint"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +179,261 @@ components:
           type: string
       required:
         - status
-
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        bloodType:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        condition:
+          type: string
+        riskLevel:
+          type: string
+          enum: [low, medium, high, critical]
+        lastVisit:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, critical]
+        doctorId:
+          type: integer
+      required:
+        - id
+        - name
+        - age
+        - gender
+        - riskLevel
+        - status
+    CreatePatient:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        bloodType:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        condition:
+          type: string
+        doctorId:
+          type: integer
+      required:
+        - name
+        - age
+        - gender
+    Doctor:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        specialty:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        patients:
+          type: integer
+        rating:
+          type: number
+        status:
+          type: string
+          enum: [active, on-leave, inactive]
+        avatar:
+          type: string
+      required:
+        - id
+        - name
+        - specialty
+        - status
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+        patientId:
+          type: integer
+        patientName:
+          type: string
+        doctorId:
+          type: integer
+        doctorName:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+          enum: [scheduled, completed, cancelled, pending]
+        notes:
+          type: string
+      required:
+        - id
+        - patientId
+        - doctorId
+        - date
+        - time
+        - status
+    CreateAppointment:
+      type: object
+      properties:
+        patientId:
+          type: integer
+        doctorId:
+          type: integer
+        date:
+          type: string
+        time:
+          type: string
+        type:
+          type: string
+        notes:
+          type: string
+      required:
+        - patientId
+        - doctorId
+        - date
+        - time
+    PredictionInput:
+      type: object
+      properties:
+        symptoms:
+          type: array
+          items:
+            type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        bloodPressure:
+          type: string
+        bloodSugar:
+          type: number
+        cholesterol:
+          type: number
+        bmi:
+          type: number
+        smokingStatus:
+          type: string
+        familyHistory:
+          type: array
+          items:
+            type: string
+      required:
+        - symptoms
+        - age
+        - gender
+    PredictionResult:
+      type: object
+      properties:
+        primaryDiagnosis:
+          type: string
+        probability:
+          type: number
+        riskLevel:
+          type: string
+          enum: [low, medium, high, critical]
+        riskScore:
+          type: integer
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConditionPrediction"
+        recommendations:
+          type: array
+          items:
+            type: string
+        urgency:
+          type: string
+      required:
+        - primaryDiagnosis
+        - probability
+        - riskLevel
+        - riskScore
+        - conditions
+        - recommendations
+    ConditionPrediction:
+      type: object
+      properties:
+        name:
+          type: string
+        probability:
+          type: number
+        riskLevel:
+          type: string
+      required:
+        - name
+        - probability
+        - riskLevel
+    AnalyticsOverview:
+      type: object
+      properties:
+        totalPatients:
+          type: integer
+        totalDoctors:
+          type: integer
+        totalAppointments:
+          type: integer
+        criticalCases:
+          type: integer
+        bedOccupancy:
+          type: number
+        avgWaitTime:
+          type: number
+        patientGrowth:
+          type: number
+        appointmentGrowth:
+          type: number
+      required:
+        - totalPatients
+        - totalDoctors
+        - totalAppointments
+        - criticalCases
+        - bedOccupancy
+        - avgWaitTime
+        - patientGrowth
+        - appointmentGrowth
+    DiseaseTrendPoint:
+      type: object
+      properties:
+        month:
+          type: string
+        diabetes:
+          type: integer
+        hypertension:
+          type: integer
+        heartDisease:
+          type: integer
+        respiratory:
+          type: integer
+        cancer:
+          type: integer
+      required:
+        - month
+        - diabetes
+        - hypertension
+        - heartDisease
+        - respiratory
+        - cancer

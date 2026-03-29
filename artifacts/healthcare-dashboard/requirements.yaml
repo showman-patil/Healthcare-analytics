@@ -1,0 +1,19 @@
+packages:
+  "gsap": "High-performance animations for smooth page transitions and micro-interactions"
+  "@gsap/react": "React specific hooks for GSAP integration"
+  "recharts": "Beautiful and responsive data visualization charts for analytics"
+  "date-fns": "Human-readable date formatting for appointments and logs"
+
+images:
+  - path: "artifacts/healthcare-dashboard/public/images/hero-medical.png"
+    description: "Abstract 3D medical network with glowing soft blue and white data nodes, DNA helix hints, shallow depth of field, premium healthcare technology feel, clean minimal background"
+    aspect_ratio: "16:9"
+  - path: "artifacts/healthcare-dashboard/public/images/auth-bg.png"
+    description: "Soft white and light blue gradient background with subtle abstract medical crosses and geometric shapes, bright and clinical, professional"
+    aspect_ratio: "16:9"
+
+notes:
+  - App relies on wouter for routing.
+  - Role-based views use mocked frontend routing (/admin, /doctor, /patient).
+  - Robust mock data fallbacks provided in case API endpoints are not yet implemented.
+  - Using Recharts for all data visualisations.
