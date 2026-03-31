@@ -5,9 +5,11 @@
   "scripts": {
     "preinstall": "node ./preinstall.cjs",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "build:render:api": "pnpm run typecheck:libs && pnpm --filter @workspace/api-server typecheck && pnpm --filter @workspace/api-server build",
     "dev:api": "pnpm --filter @workspace/api-server dev",
     "dev:dashboard": "pnpm --filter @workspace/healthcare-dashboard dev",
     "dev": "node ./scripts/dev.mjs",
+    "start:render:api": "node ./artifacts/api-server/dist/index.mjs",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
