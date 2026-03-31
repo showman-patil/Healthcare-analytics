@@ -29,6 +29,22 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (_req, res) => {
+  res.json({
+    service: "Medix AI API",
+    status: "ok",
+    message: "The API service is running. Use the /api routes to access healthcare features.",
+    endpoints: {
+      health: "/api/healthz",
+      patients: "/api/patients",
+      doctors: "/api/doctors",
+      appointments: "/api/appointments",
+      predictions: "/api/predictions",
+      analytics: "/api/analytics",
+    },
+  });
+});
+
 app.use("/api", router);
 
 export default app;
