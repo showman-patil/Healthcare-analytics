@@ -61,7 +61,7 @@ export default function DoctorRecords() {
           <h2 className="text-lg font-bold text-foreground mb-4">Patient Documents</h2>
           <div className="space-y-3">
             {records.map((record) => (
-              <div key={record.id} className="flex items-center gap-3 p-3.5 rounded-xl border border-border/60 bg-muted/20 hover:bg-muted/40 transition-colors">
+              <div key={record.id} className="flex flex-col gap-3 rounded-xl border border-border/60 bg-muted/20 p-3.5 transition-colors hover:bg-muted/40 sm:flex-row sm:items-center">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
                   <FileText size={18} className="text-blue-600" />
                 </div>
@@ -69,7 +69,7 @@ export default function DoctorRecords() {
                   <p className="text-sm font-semibold text-foreground">{record.type}</p>
                   <p className="text-xs text-muted-foreground">{record.patient} • {record.date} • {record.size}</p>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 self-start shrink-0 sm:self-center">
                   {record.status === "reviewed" ? (
                     <CheckCircle size={14} className="text-green-600" />
                   ) : (

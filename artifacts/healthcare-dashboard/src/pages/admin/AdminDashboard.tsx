@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { 
-  Users, Activity, Calendar, AlertTriangle, TrendingUp, TrendingDown 
+  Users, Activity, Calendar, AlertTriangle, TrendingUp, TrendingDown, Settings
 } from "lucide-react";
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -9,6 +9,7 @@ import {
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useGetAnalyticsOverview, useGetDiseaseTrends } from "@workspace/api-client-react";
+import { Link } from "wouter";
 import { MOCK_ANALYTICS, MOCK_TRENDS } from "@/lib/mock-data";
 
 export default function AdminDashboard() {
@@ -39,9 +40,13 @@ export default function AdminDashboard() {
           <h1 className="text-3xl font-display font-bold text-foreground">Facility Overview</h1>
           <p className="text-muted-foreground mt-1">Live metrics and analytics for your healthcare system.</p>
         </div>
-        <button className="premium-button-outline text-sm py-2">
-          Download Full Report
-        </button>
+        <Link
+          href="/admin/settings"
+          aria-label="Open settings"
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <Settings size={19} />
+        </Link>
       </div>
 
       {/* Stats Grid */}
@@ -78,8 +83,8 @@ export default function AdminDashboard() {
       </div>
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 premium-card p-6 gsap-card">
+      <div className="grid grid-cols-1 gap-6">
+        <div className="premium-card p-6 gsap-card">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-lg font-bold text-foreground">Disease Trends (6 Months)</h3>
@@ -112,28 +117,6 @@ export default function AdminDashboard() {
             </ResponsiveContainer>
           </div>
         </div>
-
-        <div className="premium-card p-6 gsap-card">
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-foreground">Resource Utilization</h3>
-            <p className="text-sm text-muted-foreground">Current hospital capacity</p>
-          </div>
-          
-          <div className="space-y-6">
-            <ProgressRow label="Bed Occupancy" value={analytics.bedOccupancy} color="bg-blue-500" />
-            <ProgressRow label="ICU Availability" value={92} color="bg-red-500" />
-            <ProgressRow label="Staff Allocation" value={68} color="bg-emerald-500" />
-            <ProgressRow label="Equipment Usage" value={45} color="bg-indigo-500" />
-          </div>
-
-          <div className="mt-8 p-4 rounded-xl bg-orange-50 border border-orange-100 flex gap-3">
-            <AlertTriangle className="text-orange-500 shrink-0" size={20} />
-            <div>
-              <h4 className="text-sm font-bold text-orange-900">ICU Capacity Warning</h4>
-              <p className="text-xs text-orange-700 mt-1">ICU beds are currently at 92% capacity. Consider diverting non-critical transfers.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -157,20 +140,6 @@ function StatCard({ title, value, trend, icon: Icon, color, isInverseGood = fals
       <div>
         <h4 className="text-3xl font-display font-bold text-foreground">{value}</h4>
         <p className="text-sm text-muted-foreground mt-1 font-medium">{title}</p>
-      </div>
-    </div>
-  );
-}
-
-function ProgressRow({ label, value, color }: { label: string, value: number, color: string }) {
-  return (
-    <div>
-      <div className="flex justify-between text-sm mb-2 font-medium">
-        <span className="text-foreground">{label}</span>
-        <span className="text-muted-foreground">{value}%</span>
-      </div>
-      <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden">
-        <div className={`h-full ${color} rounded-full`} style={{ width: `${value}%` }}></div>
       </div>
     </div>
   );

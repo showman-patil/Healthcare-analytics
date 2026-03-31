@@ -6,16 +6,44 @@ import {
   ListAppointmentsResponse,
   CreateAppointmentBody,
 } from "@workspace/api-zod";
+import { demoAppointments, demoDoctors, demoPatients } from "../lib/demo-data";
 
 const router: IRouter = Router();
 
 router.get("/appointments", async (req, res) => {
+  if (!db) {
+    res.json(ListAppointmentsResponse.parse(demoAppointments));
+    return;
+  }
+
   const appointments = await db.select().from(appointmentsTable).orderBy(appointmentsTable.id);
   res.json(ListAppointmentsResponse.parse(appointments));
 });
 
 router.post("/appointments", async (req, res) => {
   const body = CreateAppointmentBody.parse(req.body);
+
+  if (!db) {
+    const patient = demoPatients.find((item) => item.id === body.patientId);
+    const doctor = demoDoctors.find((item) => item.id === body.doctorId);
+
+    const appointment = {
+      id: demoAppointments.length + 1,
+      patientId: body.patientId,
+      patientName: patient?.name ?? "Unknown",
+      doctorId: body.doctorId,
+      doctorName: doctor?.name ?? "Unknown",
+      date: body.date,
+      time: body.time,
+      type: body.type ?? "Consultation",
+      notes: body.notes,
+      status: "scheduled" as const,
+    };
+
+    demoAppointments.push(appointment);
+    res.status(201).json(appointment);
+    return;
+  }
 
   let patientName = "Unknown";
   let doctorName = "Unknown";

@@ -63,10 +63,10 @@ export default function DoctorMessages() {
         <p className="text-muted-foreground mt-1">Chat with patients and colleagues</p>
       </div>
 
-      <div className="premium-card overflow-hidden gsap-in" style={{ height: "580px" }}>
-        <div className="flex h-full">
+      <div className="premium-card overflow-hidden gsap-in lg:h-[580px]">
+        <div className="flex h-full flex-col lg:flex-row">
           {/* Contact List */}
-          <div className="w-72 border-r border-border flex flex-col shrink-0">
+          <div className="flex w-full shrink-0 flex-col border-b border-border lg:w-72 lg:border-b-0 lg:border-r">
             <div className="p-3 border-b border-border">
               <div className="flex items-center gap-2 bg-muted rounded-xl px-3 py-2">
                 <Search size={13} className="text-muted-foreground" />
@@ -79,7 +79,7 @@ export default function DoctorMessages() {
                 />
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto">
+            <div className="max-h-72 flex-1 overflow-y-auto lg:max-h-none">
               {filtered.map(contact => (
                 <button
                   key={contact.id}
@@ -111,14 +111,14 @@ export default function DoctorMessages() {
           </div>
 
           {/* Chat Window */}
-          <div className="flex-1 flex flex-col min-w-0">
+          <div className="flex min-h-[24rem] min-w-0 flex-1 flex-col">
             {/* Chat Header */}
-            <div className="px-5 py-4 border-b border-border flex items-center gap-3">
+            <div className="flex items-center gap-3 border-b border-border px-4 py-4 sm:px-5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white text-sm font-bold">
                 {selectedContact.initials}
               </div>
-              <div>
-                <p className="text-sm font-bold text-foreground">{selectedContact.name}</p>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-bold text-foreground">{selectedContact.name}</p>
                 <p className="text-xs text-muted-foreground">{selectedContact.role}</p>
               </div>
               <div className="ml-auto flex items-center gap-1.5">
@@ -128,10 +128,10 @@ export default function DoctorMessages() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 space-y-4 overflow-y-auto p-4">
               {currentMessages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.isSelf ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[70%] ${msg.isSelf ? "items-end" : "items-start"} flex flex-col gap-1`}>
+                  <div className={`max-w-[85%] sm:max-w-[70%] ${msg.isSelf ? "items-end" : "items-start"} flex flex-col gap-1`}>
                     <div className={`px-4 py-2.5 rounded-2xl text-sm ${
                       msg.isSelf
                         ? "bg-primary text-primary-foreground rounded-br-md"

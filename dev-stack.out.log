@@ -1,0 +1,50 @@
+[dev] Starting API server...
+
+> @workspace/api-server@0.0.0 dev C:\Users\rahul\Downloads\Health-Insight-Hub\Health-Insight-Hub\artifacts\api-server
+> node ./dev.mjs
+
+{"level":30,"time":1774786995311,"pid":14432,"hostname":"rahul_patil","port":3001,"msg":"Server listening"}
+{"level":30,"time":1774786995832,"pid":14432,"hostname":"rahul_patil","req":{"id":1,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":11,"msg":"request completed"}
+[dev] API server is ready.
+[dev] Starting dashboard...
+
+> @workspace/healthcare-dashboard@0.0.0 dev C:\Users\rahul\Downloads\Health-Insight-Hub\Health-Insight-Hub\artifacts\healthcare-dashboard
+> vite --config vite.config.ts --host 0.0.0.0
+
+
+  [32m[1mVITE[22m v7.3.1[39m  [2mready in [0m[1m1012[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.109.1:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.16.1:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.31.54:[1m5173[22m/[39m
+{"level":30,"time":1774787016580,"pid":14432,"hostname":"rahul_patil","req":{"id":2,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774787016586,"pid":14432,"hostname":"rahul_patil","req":{"id":3,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774787016637,"pid":14432,"hostname":"rahul_patil","req":{"id":4,"method":"GET","url":"/api/doctors"},"res":{"statusCode":200},"responseTime":3,"msg":"request completed"}
+{"level":30,"time":1774787694688,"pid":14432,"hostname":"rahul_patil","req":{"id":5,"method":"POST","url":"/api/predictions"},"res":{"statusCode":200},"responseTime":11,"msg":"request completed"}
+{"level":30,"time":1774787739834,"pid":14432,"hostname":"rahul_patil","req":{"id":6,"method":"GET","url":"/api/analytics/overview"},"res":{"statusCode":200},"responseTime":3,"msg":"request completed"}
+{"level":30,"time":1774787739871,"pid":14432,"hostname":"rahul_patil","req":{"id":7,"method":"GET","url":"/api/analytics/disease-trends"},"res":{"statusCode":200},"responseTime":36,"msg":"request completed"}
+{"level":30,"time":1774787742471,"pid":14432,"hostname":"rahul_patil","req":{"id":8,"method":"GET","url":"/api/analytics/overview"},"res":{"statusCode":304},"responseTime":4,"msg":"request completed"}
+{"level":30,"time":1774787742488,"pid":14432,"hostname":"rahul_patil","req":{"id":9,"method":"GET","url":"/api/analytics/disease-trends"},"res":{"statusCode":304},"responseTime":7,"msg":"request completed"}
+{"level":30,"time":1774787996936,"pid":14432,"hostname":"rahul_patil","req":{"id":10,"method":"GET","url":"/api/analytics/overview"},"res":{"statusCode":304},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774787996938,"pid":14432,"hostname":"rahul_patil","req":{"id":11,"method":"GET","url":"/api/analytics/disease-trends"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788001650,"pid":14432,"hostname":"rahul_patil","req":{"id":12,"method":"GET","url":"/api/patients"},"res":{"statusCode":200},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774788001664,"pid":14432,"hostname":"rahul_patil","req":{"id":13,"method":"GET","url":"/api/doctors"},"res":{"statusCode":200},"responseTime":13,"msg":"request completed"}
+{"level":30,"time":1774788085706,"pid":14432,"hostname":"rahul_patil","req":{"id":14,"method":"GET","url":"/api/patients"},"res":{"statusCode":304},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774788086009,"pid":14432,"hostname":"rahul_patil","req":{"id":15,"method":"GET","url":"/api/doctors"},"res":{"statusCode":304},"responseTime":0,"msg":"request completed"}
+{"level":30,"time":1774788230227,"pid":14432,"hostname":"rahul_patil","req":{"id":16,"method":"GET","url":"/api/analytics/overview"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788230230,"pid":14432,"hostname":"rahul_patil","req":{"id":17,"method":"GET","url":"/api/analytics/disease-trends"},"res":{"statusCode":304},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774788231776,"pid":14432,"hostname":"rahul_patil","req":{"id":18,"method":"GET","url":"/api/patients"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788231778,"pid":14432,"hostname":"rahul_patil","req":{"id":19,"method":"GET","url":"/api/doctors"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788281599,"pid":14432,"hostname":"rahul_patil","req":{"id":20,"method":"GET","url":"/api/appointments"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788281912,"pid":14432,"hostname":"rahul_patil","req":{"id":21,"method":"GET","url":"/api/patients"},"res":{"statusCode":304},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774788335399,"pid":14432,"hostname":"rahul_patil","req":{"id":22,"method":"GET","url":"/api/patients"},"res":{"statusCode":304},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774788387266,"pid":14432,"hostname":"rahul_patil","req":{"id":23,"method":"GET","url":"/api/appointments"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774788387567,"pid":14432,"hostname":"rahul_patil","req":{"id":24,"method":"GET","url":"/api/patients"},"res":{"statusCode":304},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774789253482,"pid":14432,"hostname":"rahul_patil","req":{"id":25,"method":"POST","url":"/api/predictions"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774789277359,"pid":14432,"hostname":"rahul_patil","req":{"id":26,"method":"POST","url":"/api/predictions"},"res":{"statusCode":200},"responseTime":2,"msg":"request completed"}
+{"level":30,"time":1774789323104,"pid":14432,"hostname":"rahul_patil","req":{"id":27,"method":"POST","url":"/api/predictions"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1774789335079,"pid":14432,"hostname":"rahul_patil","req":{"id":28,"method":"POST","url":"/api/predictions"},"res":{"statusCode":200},"responseTime":6,"msg":"request completed"}
+C:\Users\rahul\Downloads\Health-Insight-Hub\Health-Insight-Hub\artifacts\api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 dev: `node ./dev.mjs`
+Exit status 3221225786

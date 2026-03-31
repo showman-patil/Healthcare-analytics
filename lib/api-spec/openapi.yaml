@@ -357,6 +357,16 @@ components:
           enum: [low, medium, high, critical]
         riskScore:
           type: integer
+        summary:
+          type: string
+        keyFindings:
+          type: array
+          items:
+            type: string
+        redFlags:
+          type: array
+          items:
+            type: string
         conditions:
           type: array
           items:
@@ -367,13 +377,20 @@ components:
             type: string
         urgency:
           type: string
+        analysisVersion:
+          type: string
       required:
         - primaryDiagnosis
         - probability
         - riskLevel
         - riskScore
+        - summary
+        - keyFindings
+        - redFlags
         - conditions
         - recommendations
+        - urgency
+        - analysisVersion
     ConditionPrediction:
       type: object
       properties:

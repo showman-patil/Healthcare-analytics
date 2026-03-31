@@ -37,28 +37,31 @@ export default function Home() {
             </div>
             <h1 className="font-display font-bold text-3xl tracking-tight">MedixAI</h1>
           </div>
-          
-          <h2 className="text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-            Next-Gen <br />Healthcare <br />Intelligence.
-          </h2>
-          <p className="text-blue-100 text-lg lg:text-xl max-w-md leading-relaxed">
-            Predictive analytics, seamless patient management, and AI-driven diagnostics for modern medical facilities.
-          </p>
-        </div>
 
-        <div className="relative z-10 animate-in">
-          <div className="flex items-center gap-4 text-sm font-medium text-blue-200">
-            <span>Enterprise Grade</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-            <span>HIPAA Compliant</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-            <span>AI Powered</span>
+          <div className="relative mx-auto flex min-h-[36rem] max-w-[38rem] flex-col justify-center">
+            <div className="absolute inset-6 rounded-[3.25rem] border border-white/10 bg-white/5" />
+            <div className="absolute inset-12 rounded-[2.75rem] border border-white/10 bg-white/5" />
+
+            <div className="relative z-10 space-y-8 px-10">
+              <div className="max-w-md space-y-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-100/80">
+                  Intelligent Care Platform
+                </p>
+                <h2 className="text-4xl font-display font-bold leading-tight text-white">
+                  Smarter patient insights for every clinical decision.
+                </h2>
+                <p className="text-base leading-7 text-blue-100/85">
+                  Predictive healthcare workflows for patients and doctors in one secure system.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
 
       {/* Right Side - Role Selection */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 relative">
+      <div className="relative flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
           <img 
             src={`${import.meta.env.BASE_URL}images/auth-bg.png`} 
@@ -67,36 +70,48 @@ export default function Home() {
           />
         </div>
 
-        <div className="max-w-md w-full relative z-10">
-          <div className="text-center mb-10 animate-in">
-            <h2 className="text-3xl font-display font-bold text-foreground mb-3">Welcome to MedixAI</h2>
-            <p className="text-muted-foreground">Select your portal access level to continue</p>
+        <div className="relative z-10 w-full max-w-xl">
+          <div className="animate-in mb-8 rounded-[1.75rem] border border-border/70 bg-white/85 p-5 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl md:hidden">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/25">
+                <HeartPulse size={26} />
+              </div>
+              <div>
+                <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">MedixAI</h1>
+                <p className="text-sm text-muted-foreground">Healthcare intelligence platform</p>
+              </div>
+            </div>
+            <p className="text-sm leading-6 text-muted-foreground">
+              Secure role-based access for patients and medical professionals.
+            </p>
+          </div>
+
+          <div className="text-center mb-10 sm:mb-12 animate-in">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-3">Welcome to MedixAI</h2>
+            <p className="text-lg text-muted-foreground">Select your portal access level to continue</p>
           </div>
 
           <div className="space-y-4">
             <RoleCard 
-              to="/admin/dashboard" 
-              icon={Shield} 
-              title="Administrator" 
-              description="Manage facility resources, user access, and view hospital-wide analytics."
-              color="text-indigo-600"
-              bg="bg-indigo-100"
+              to="/patient/auth" 
+              icon={User} 
+              title="Patient Portal" 
+              color="text-blue-600"
+              bg="bg-blue-100"
             />
             <RoleCard 
-              to="/doctor/dashboard" 
+              to="/doctor/auth" 
               icon={Stethoscope} 
               title="Medical Professional" 
-              description="Access patient records, schedules, and use AI disease prediction tools."
               color="text-emerald-600"
               bg="bg-emerald-100"
             />
             <RoleCard 
-              to="/patient/dashboard" 
-              icon={User} 
-              title="Patient Portal" 
-              description="View your health records, book appointments, and check symptoms."
-              color="text-blue-600"
-              bg="bg-blue-100"
+              to="/admin/auth" 
+              icon={Shield} 
+              title="Administrator" 
+              color="text-indigo-600"
+              bg="bg-indigo-100"
             />
           </div>
         </div>
@@ -105,19 +120,18 @@ export default function Home() {
   );
 }
 
-function RoleCard({ to, icon: Icon, title, description, color, bg }: any) {
+function RoleCard({ to, icon: Icon, title, color, bg }: any) {
   return (
     <Link href={to} className="animate-in block group">
-      <div className="premium-card p-6 flex items-center gap-5 bg-white/80 backdrop-blur-md">
-        <div className={`w-14 h-14 rounded-2xl ${bg} ${color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-          <Icon size={28} />
+      <div className="premium-card flex flex-col items-start gap-4 bg-white/80 p-6 backdrop-blur-md sm:flex-row sm:items-center sm:gap-6 sm:p-7">
+        <div className={`w-16 h-16 rounded-2xl ${bg} ${color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+          <Icon size={30} />
         </div>
-        <div className="flex-1">
-          <h3 className="font-bold text-foreground text-lg group-hover:text-primary transition-colors">{title}</h3>
-          <p className="text-sm text-muted-foreground mt-1 leading-snug">{description}</p>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-bold text-foreground text-xl group-hover:text-primary transition-colors">{title}</h3>
         </div>
-        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
-          <ArrowRight size={20} />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors group-hover:bg-primary group-hover:text-white sm:self-center">
+          <ArrowRight size={22} />
         </div>
       </div>
     </Link>

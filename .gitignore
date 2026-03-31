@@ -44,6 +44,12 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
+# Local workspace files
 .cache/
 .local/
+
+# Local model training assets
+artifacts/model-training/.venv/
+artifacts/model-training/__pycache__/
+artifacts/model-training/data/raw/*
+!artifacts/model-training/data/raw/.gitkeep

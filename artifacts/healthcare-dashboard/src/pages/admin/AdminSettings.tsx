@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import { Bell, Shield, Settings, Database, Mail, Clock, Save } from "lucide-react";
+import { ArrowLeft, Bell, Shield, Settings, Database, Mail, Clock, Save } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Link } from "wouter";
 
 function Toggle({ checked, onChange }: { checked: boolean; onChange: () => void }) {
   return (
@@ -48,9 +49,18 @@ export default function AdminSettings() {
 
   return (
     <div ref={container} className="space-y-6">
-      <div className="gsap-in">
-        <h1 className="text-3xl font-display font-bold text-foreground">System Settings</h1>
-        <p className="text-muted-foreground mt-1">Manage notifications, permissions, and system configuration</p>
+      <div className="gsap-in flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-display font-bold text-foreground">System Settings</h1>
+          <p className="text-muted-foreground mt-1">Manage notifications, permissions, and system configuration</p>
+        </div>
+        <Link
+          href="/admin/dashboard"
+          className="premium-button-outline inline-flex items-center gap-2 text-sm font-semibold"
+        >
+          <ArrowLeft size={16} />
+          Back
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

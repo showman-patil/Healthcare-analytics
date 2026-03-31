@@ -7,16 +7,35 @@ import {
   GetPatientResponse,
   CreatePatientBody,
 } from "@workspace/api-zod";
+import { demoPatients } from "../lib/demo-data";
 
 const router: IRouter = Router();
 
 router.get("/patients", async (req, res) => {
+  if (!db) {
+    res.json(ListPatientsResponse.parse(demoPatients));
+    return;
+  }
+
   const patients = await db.select().from(patientsTable).orderBy(patientsTable.id);
   res.json(ListPatientsResponse.parse(patients));
 });
 
 router.get("/patients/:id", async (req, res) => {
   const id = parseInt(req.params.id);
+
+  if (!db) {
+    const patient = demoPatients.find((item) => item.id === id);
+
+    if (!patient) {
+      res.status(404).json({ error: "Patient not found" });
+      return;
+    }
+
+    res.json(GetPatientResponse.parse(patient));
+    return;
+  }
+
   const [patient] = await db.select().from(patientsTable).where(eq(patientsTable.id, id));
   if (!patient) {
     res.status(404).json({ error: "Patient not found" });
@@ -27,6 +46,28 @@ router.get("/patients/:id", async (req, res) => {
 
 router.post("/patients", async (req, res) => {
   const body = CreatePatientBody.parse(req.body);
+
+  if (!db) {
+    const patient = {
+      id: demoPatients.length + 1,
+      name: body.name,
+      age: body.age,
+      gender: body.gender,
+      bloodType: body.bloodType,
+      phone: body.phone,
+      email: body.email,
+      condition: body.condition,
+      doctorId: body.doctorId,
+      riskLevel: "low" as const,
+      status: "active" as const,
+      lastVisit: new Date().toISOString().slice(0, 10),
+    };
+
+    demoPatients.push(patient);
+    res.status(201).json(patient);
+    return;
+  }
+
   const [patient] = await db.insert(patientsTable).values({
     name: body.name,
     age: body.age,
